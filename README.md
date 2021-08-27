@@ -2,10 +2,12 @@
 
 dwm is an extremely fast, small, and dynamic window manager for X.
 
-> Requirements
+#### Requirements
+
 In order to build dwm you need the Xlib header files.
 
-> Installation
+#### Installation
+
 Edit config.mk to match your local setup (dwm is installed into
 the /usr/local namespace by default).
 
@@ -15,7 +17,8 @@ necessary as root):
 make clean install
 ```
 
-> Running dwm
+#### Running dwm
+
 Add the following line to your .xinitrc to start dwm using startx:
 ```
 exec dwm
@@ -38,7 +41,7 @@ done &
 exec dwm
 ```
 
-> Configuration
+#### Configuration
 The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
 
@@ -47,7 +50,7 @@ and (re)compiling the source code.
 Most of the info on how to patch/update can be found here
 [pathces](https://dwm.suckless.org/customisation/patches_in_git/)
 
-> Remotes
+#### Remotes
 See remotes with:
 ```
 git remote -v
@@ -58,7 +61,7 @@ my\_repo : github repo to save my own customization
 For customization always pull/push to my\_repo in my\_dwm branch (and sub-branches)
 To pull updates pull from origin into the master branch (see next section)
 
-> Branches
+#### Branches
 master : contains dwm's original binaries as in [suckless](git://git.suckless.org/dwm)
 my\_dwm : contains customized binaries - you should only make changes here
 Show branches:
@@ -66,7 +69,7 @@ Show branches:
 git branch -vv
 ```
 
-> Update origin
+#### Update origin
 To update:
 ```
 git checkout master
@@ -78,7 +81,7 @@ git checkout my\_dwm
 git rebase --preserve-merges master
 ```
 
-> Push/pull changes to/from my\_repo
+#### Push/pull changes to/from my\_repo
 For example
 ```
 git push my_repo my_dwm
@@ -86,7 +89,7 @@ git push my_repo my_dwm
 \* when the default upstream is set for the current branch you can omit repo and branch name. This can be done with:
     git push --set-upstream my_repo my_dwm
 
-> Patch program
+#### Patch program
 
 For git users, use -3 to fix the conflict easily:
 ```
@@ -105,3 +108,5 @@ For tarballs:
 cd dwm
 patch -p1 < patches/patch.diff
 ```
+
+### Patches
