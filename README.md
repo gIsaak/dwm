@@ -48,7 +48,7 @@ and (re)compiling the source code.
 ### How to keep dwm up to date and push to your onw git repo
 
 Most of the info on how to patch/update can be found here
-[pathces](https://dwm.suckless.org/customisation/patches_in_git/)
+[patches](https://dwm.suckless.org/customisation/patches_in_git/)
 
 #### Remotes
 See remotes with:
@@ -62,7 +62,7 @@ For customization always pull/push to my\_repo in my\_dwm branch (and sub-branch
 To pull updates pull from origin into the master branch (see next section)
 
 #### Branches
-master : contains dwm's original binaries as in [suckless](git://git.suckless.org/dwm)\
+master : contains dwm's original binaries as in <git://git.suckless.org/dwm>\
 my\_dwm : contains customized binaries - you should only make changes here\
 Show branches:
 ```
