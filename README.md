@@ -55,15 +55,15 @@ See remotes with:
 ```
 git remote -v
 ```
-origin : suckless's dwm repository
+origin : suckless's dwm repository\
 my\_repo : github repo to save my own customization
 
-For customization always pull/push to my\_repo in my\_dwm branch (and sub-branches)
+For customization always pull/push to my\_repo in my\_dwm branch (and sub-branches)\
 To pull updates pull from origin into the master branch (see next section)
 
 #### Branches
-master : contains dwm's original binaries as in [suckless](git://git.suckless.org/dwm)
-my\_dwm : contains customized binaries - you should only make changes here
+master : contains dwm's original binaries as in [suckless](git://git.suckless.org/dwm)\
+my\_dwm : contains customized binaries - you should only make changes here\
 Show branches:
 ```
 git branch -vv
