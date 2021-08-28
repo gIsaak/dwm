@@ -92,7 +92,7 @@ git push --set-upstream my_repo my_dwm
 ```
 
 #### Patch
-It is good practice to create a new brnch for the patch:
+It is good practice to create a new branch for the patch:
 ```
 git checkout -b patch_name-patch
 ```
@@ -117,4 +117,4 @@ patch -p1 < patches/patch.diff
 
 ### Patches
 
-
+- swallow
