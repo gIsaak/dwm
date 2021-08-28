@@ -1,4 +1,5 @@
 .*
+*.bak
 util.o
 dwm
 dwm.o

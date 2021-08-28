@@ -87,9 +87,15 @@ For example
 git push my_repo my_dwm
 ```
 \* when the default upstream is set for the current branch you can omit repo and branch name. This can be done with:
-    git push --set-upstream my_repo my_dwm
+```
+git push --set-upstream my_repo my_dwm
+```
 
-#### Patch program
+#### Patch
+It is good practice to create a new brnch for the patch:
+```
+git checkout -b patch_name-patch
+```
 
 For git users, use -3 to fix the conflict easily:
 ```
