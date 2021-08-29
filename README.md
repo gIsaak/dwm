@@ -42,6 +42,7 @@ exec dwm
 ```
 
 #### Configuration
+
 The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
 
@@ -51,6 +52,7 @@ Most of the info on how to patch/update can be found here
 [patches](https://dwm.suckless.org/customisation/patches_in_git/)
 
 #### Remotes
+
 See remotes with:
 ```
 git remote -v
@@ -62,6 +64,7 @@ For customization always pull/push to my\_repo in my\_dwm branch (and sub-branch
 To pull updates pull from origin into the master branch (see next section)
 
 #### Branches
+
 master : contains dwm's original binaries as in <git://git.suckless.org/dwm>\
 my\_dwm : contains customized binaries - you should only make changes here\
 Show branches:
@@ -70,31 +73,36 @@ git branch -vv
 ```
 
 #### Update origin
+
 To update:
 ```
 git checkout master
 git pull origin
 ```
+
 In case of some conflicts:
 ```
-git checkout my\_dwm
+git checkout my_dwm
 git rebase --preserve-merges master
 ```
 
 #### Push/pull changes to/from my\_repo
+
 For example
 ```
 git push my_repo my_dwm
 ```
-\* when the default upstream is set for the current branch you can omit repo and branch name. This can be done with:
+
+\* when the default upstream is set for the current branch you can omit repo and branch name. This can be done with:`
 ```
 git push --set-upstream my_repo my_dwm
 ```
 
 #### Patch
-It is good practice to create a new branch for the patch:
+
+It is good practice to create a new branch for the patch to try fron the branch of the last implemented patch:
 ```
-git checkout -b patch_name-patch
+git checkout -b patch_name-patch last_patch-patch
 ```
 
 For git users, use -3 to fix the conflict easily:
@@ -103,18 +111,22 @@ cd dwm
 git apply patches/patch.diff
 ```
 
-For patches formatted with git format-patch:
+Most patches change config.def.h, copy these changes in config.h with vimfidd:
 ```
-cd dwm
-git am patches/patch.diff
+vimdiff config.def.h config.h
 ```
+do: obtain change\
+dp: put change\
+]c: next change\
+[c: prev change\
 
-For tarballs:
+To keep the patch, commit changes locally and merge changes in the my\_dwm branch.
 ```
-cd dwm
-patch -p1 < patches/patch.diff
+git checkout my_dwm
+git merge last_patch-patch
 ```
 
 ### Patches
 
 - swallow
+- actualfullscreen
