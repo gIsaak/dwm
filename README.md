@@ -130,3 +130,4 @@ git merge last_patch-patch
 
 - swallow
 - actualfullscreen
+- Font Awesome 5 icons and colored emojis support with libxft-bgra
