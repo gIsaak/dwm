@@ -4,5 +4,7 @@ util.o
 dwm
 dwm.o
 drw.o
-config.def.h
 patches
+config.def.h
+*.orig
+*.rej
