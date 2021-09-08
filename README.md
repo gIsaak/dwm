@@ -129,6 +129,15 @@ git merge last_patch-patch
 ### Patches
 
 - swallow
+    - `dwm-swallow-20201211-61bb8b2.diff`
 - actualfullscreen
+    - `dwm-actualfullscreen-20191112-cb3f58a.diff`
 - Font Awesome 5 icons and colored emojis support with libxft-bgra
 - restarttsig
+    - `dwm-restartsig-20180523-6.2.diff`
+- xresources
+    - `dwm-xresources-6.2.diff`
+
+
+
+
