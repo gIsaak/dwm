@@ -1,5 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
+#define TERMINAL "alacritty"
+#define TERMCLASS "Alacritty"
+
 /* appearance */
 static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
@@ -33,9 +36,9 @@ static const Rule rules[] = {
 	/* class                 instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Gimp",                NULL,     NULL,           0,         1,          0,           0,        -1 },
 	{ "Brave-browser",       NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
-	{ "Alacritty",           NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{  TERMCLASS,            NULL,     NULL,           0,         0,          1,           0,        -1 },
     { "zoom",                NULL,     NULL,           1 << 7,    0,          0,          -1,        -1 },
-	{ NULL,                  NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	{  NULL,                 NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
 /* layout(s) */
@@ -65,7 +68,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { TERMINAL, NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -76,7 +79,7 @@ ResourcePref resources[] = {
 		{ "color4",             STRING,  &normfgcolor },
 		{ "color4",             STRING,  &selbgcolor },
 		{ "color8",             STRING,  &selbordercolor },
-		{ "color0",         STRING,  &selfgcolor },
+		{ "color0",             STRING,  &selfgcolor },
 		{ "borderpx",          	INTEGER, &borderpx },
 		{ "snap",          		INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
