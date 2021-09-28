@@ -137,7 +137,5 @@ git merge last_patch-patch
     - `dwm-restartsig-20180523-6.2.diff`
 - xresources
     - `dwm-xresources-6.2.diff`
-
-
-
-
+- statuscmd
+    - `dwm-statuscmd-20210405-67d76bd.diff`

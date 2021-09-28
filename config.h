@@ -91,6 +91,8 @@ ResourcePref resources[] = {
 		{ "mfact",      	 	FLOAT,   &mfact },
 };
 
+#include <X11/XF86keysym.h>
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -126,8 +128,12 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+	{ MODKEY,                       XK_w,      spawn,          SHCMD("$BROWSER") },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} },
+    { 0, XF86XK_AudioMute,          spawn,      SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+    { 0, XF86XK_AudioRaiseVolume,   spawn,      SHCMD("pamixer -i 2; kill -44 $(pidof dwmblocks)") },
+    { 0, XF86XK_AudioLowerVolume,   spawn,      SHCMD("pamixer -d 2; kill -44 $(pidof dwmblocks)") },
 };
 
 /* button definitions */
