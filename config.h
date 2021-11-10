@@ -4,15 +4,15 @@
 #define TERMCLASS "Alacritty"
 
 /* appearance */
-static unsigned int borderpx  = 1;        /* border pixel of windows */
+static unsigned int borderpx  = 2;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10",
-                                        "Font Awesome 5 Free Regular:size=10",
-                                        "Font Awesome 5 Free Solid:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "monospace:size=8",
+                                        "Font Awesome 5 Free Regular:size=8",
+                                        "Font Awesome 5 Free Solid:size=8" };
+static const char dmenufont[]       = "monospace:size=8";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
