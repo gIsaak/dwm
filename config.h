@@ -9,10 +9,11 @@ static unsigned int snap      = 32;       /* snap pixel */
 static int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=8",
-                                        "Font Awesome 5 Free Regular:size=8",
-                                        "Font Awesome 5 Free Solid:size=8" };
-static const char dmenufont[]       = "monospace:size=8";
+static const char *fonts[]          = { "monospace:size=10",
+                                        "Font Awesome 5 Free Regular:size=10:antialias=true:autohint=true",
+                                        "Font Awesome 5 Free Solid:size=10:antialias=true:autohint=true",
+                                        "Noto Color Emoji:size=10:antialias=true:autohint=true"};
+static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
