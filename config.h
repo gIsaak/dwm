@@ -10,8 +10,8 @@ static int swallowfloating    = 0;        /* 1 means swallow floating windows by
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10",
-                                        "Font Awesome 5 Free Regular:size=10:antialias=true:autohint=true",
-                                        "Font Awesome 5 Free Solid:size=10:antialias=true:autohint=true",
+                                        "Font Awesome 6 Free Regular:size=10",
+                                        "Font Awesome 6 Free Solid:size=10",
                                         "Noto Color Emoji:size=10:antialias=true:autohint=true"};
 static const char dmenufont[]       = "monospace:size=10";
 static char normbgcolor[]           = "#222222";
