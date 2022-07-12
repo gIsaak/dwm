@@ -132,10 +132,12 @@ git merge last_patch-patch
     - `dwm-swallow-20201211-61bb8b2.diff`
 - actualfullscreen
     - `dwm-actualfullscreen-20191112-cb3f58a.diff`
-- Font Awesome 5 icons and colored emojis support with libxft-bgra
+- Colored emojis support with libxft-bgra
 - restarttsig
     - `dwm-restartsig-20180523-6.2.diff`
 - xresources
     - `dwm-xresources-6.2.diff`
 - statuscmd
     - `dwm-statuscmd-20210405-67d76bd.diff`
+- vanity-gaps
+    - `dwm-vanitygaps-20190508-6.2.diff`
