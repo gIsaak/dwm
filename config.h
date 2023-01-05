@@ -43,7 +43,8 @@ static const Rule rules[] = {
 	{ "Brave-browser",       NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
 	{  TERMCLASS,            NULL,     NULL,           0,         0,          1,           0,        -1 },
     { "zoom",                NULL,     NULL,           1 << 7,    0,          0,          -1,        -1 },
-	{ "matplotlib",          NULL,     NULL,           0,         1,          0,           1,        -1 },
+	{ "Matplotlib",          NULL,     NULL,           0,         1,          0,           1,        -1 },
+	{ "Julia",               NULL,     NULL,           0,         1,          0,           1,        -1 },
 	{  NULL,                 NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
