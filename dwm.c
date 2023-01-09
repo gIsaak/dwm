@@ -84,7 +84,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum { SchemeNorm=16, SchemeSel, SchemeWarn, SchemeUrgent }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
@@ -209,6 +209,7 @@ static void cleanupmon(Monitor *mon);
 static void clientmessage(XEvent *e);
 static void configure(Client *c);
 static void configurenotify(XEvent *e);
+static void copyvalidchars(char *cleantext, char *text, char *rawtext);
 static void configurerequest(XEvent *e);
 static Monitor *createmon(void);
 static void destroynotify(XEvent *e);
@@ -327,7 +328,8 @@ static pid_t winpid(Window w);
 static Systray *systray =  NULL;
 static const char broken[] = "broken";
 static char stext[256];
-static int statusw;
+static char rawstext[256];
+static char cleanstext[256];
 static int statussig;
 static pid_t statuspid = -1;
 static int screen;
@@ -573,7 +575,6 @@ buttonpress(XEvent *e)
 	Client *c;
 	Monitor *m;
 	XButtonPressedEvent *ev = &e->xbutton;
-	char *text, *s, ch;
 
 	click = ClkRootWin;
 	/* focus monitor if necessary */
@@ -592,19 +593,22 @@ buttonpress(XEvent *e)
 			arg.ui = 1 << i;
 		} else if (ev->x < x + blw)
 			click = ClkLtSymbol;
-		else if (ev->x > selmon->ww - statusw - getsystraywidth()) {
-			x = selmon->ww - statusw - getsystraywidth();
+		else if (ev->x > (x = selmon->ww - TEXTW(stext) + lrpad - getsystraywidth())) {
 			click = ClkStatusText;
+
+			char *text = rawstext;
+			int i = -1;
+			char ch;
 			statussig = 0;
-			for (text = s = stext; *s && x <= ev->x; s++) {
-				if ((unsigned char)(*s) < ' ') {
-					ch = *s;
-					*s = '\0';
+			while (text[++i]) {
+				if ((unsigned char)text[i] < '\x10') {
+					ch = text[i];
+					text[i] = '\0';
 					x += TEXTW(text) - lrpad;
-					*s = ch;
-					text = s + 1;
-					if (x >= ev->x)
-						break;
+					text[i] = ch;
+					text += i+1;
+					i = -1;
+					if (x >= ev->x) break;
 					statussig = ch;
 				}
 			}
@@ -847,6 +851,24 @@ configurerequest(XEvent *e)
 	XSync(dpy, False);
 }
 
+void
+copyvalidchars(char *cleantext, char *text, char *rawtext)
+{
+	int i = -1, j = 0, k = 0;
+
+	while(rawtext[++i]) {
+		if ((unsigned char)rawtext[i] >= '\x10') {
+			text[j++] = rawtext[i];
+		}
+		if ((unsigned char)rawtext[i] >= ' ') {
+			cleantext[k++] = rawtext[i];
+		}
+	}
+	text[j] = '\0';
+	cleantext[k] = '\0';
+}
+
+
 Monitor *
 createmon(void)
 {
@@ -932,6 +954,10 @@ drawbar(Monitor *m)
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
+	char *ts = stext;
+	char *tp = stext;
+	int tx = 0;
+	char ctmp;
 	Client *c;
 
 	if(showsystray && m == systraytomon(m))
@@ -939,27 +965,24 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
-		char *text, *s, ch;
 		drw_setscheme(drw, scheme[SchemeNorm]);
+		tw = TEXTW(cleanstext) - lrpad + 2; /* 2px right padding */
 
-		x = 0;
-		for (text = s = stext; *s; s++) {
-			if ((unsigned char)(*s) < ' ') {
-				ch = *s;
-				*s = '\0';
-				tw = TEXTW(text) - lrpad;
-				drw_text(drw, m->ww - statusw + x - stw, 0, tw, bh, 0, text, 0);
-				x += tw;
-				*s = ch;
-				text = s + 1;
-			}
-		}
-		tw = TEXTW(text) - lrpad + 2;
-		drw_text(drw, m->ww - statusw + x - stw, 0, tw, bh, 0, text, 0);
-		tw = statusw;
+        while (1) {
+            if ((unsigned int)*ts > LENGTH(colors)) { ts++; continue ; }
+            ctmp = *ts;
+            *ts = '\0';
+            drw_text(drw, m->ww - tw + tx - stw, 0, tw - tx, bh, 0, tp, 0);
+            tx += TEXTW(tp) -lrpad;
+            if (ctmp == '\0') { break; }
+            drw_setscheme(drw, scheme[(unsigned int)(ctmp-1)]);
+            *ts = ctmp;
+            tp = ++ts;
+        }
 	}
 
 	resizebarwin(m);
+
 	for (c = m->clients; c; c = c->next) {
 		occ |= c->tags;
 		if (c->isurgent)
@@ -2558,25 +2581,10 @@ updatesizehints(Client *c)
 void
 updatestatus(void)
 {
-	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext))) {
+	if (!gettextprop(root, XA_WM_NAME, rawstext, sizeof(rawstext)))
 		strcpy(stext, "dwm-"VERSION);
-		statusw = TEXTW(stext) - lrpad + 2;
-	} else {
-		char *text, *s, ch;
-
-		statusw  = 0;
-		for (text = s = stext; *s; s++) {
-			if ((unsigned char)(*s) < ' ') {
-				ch = *s;
-				*s = '\0';
-				statusw += TEXTW(text) - lrpad;
-				*s = ch;
-				text = s + 1;
-			}
-		}
-		statusw += TEXTW(text) - lrpad + 2;
-
-	}
+	else
+		copyvalidchars(cleanstext, stext, rawstext);
 	drawbar(selmon);
 	updatesystray();
 }
