@@ -34,7 +34,7 @@ static char warnbordercolor[]            = "#000000";
 static char urgentfgcolor[]              = "#ff0000";
 static char urgentbgcolor[]              = "#000000";
 static char urgentbordercolor[]          = "#000000";
-static const unsigned int baralpha       = 0xCC;
+static const unsigned int baralpha       = 0xFF;
 static const unsigned int borderalpha    = OPAQUE;
 
 static char *colors[][3] = {
@@ -46,8 +46,10 @@ static char *colors[][3] = {
 };
 static const unsigned int alphas[][3]      = {
 	/*               fg      bg        border     */
-	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeNorm]    = { OPAQUE, baralpha, borderalpha },
+	[SchemeSel]     = { OPAQUE, baralpha, borderalpha },
+    [SchemeWarn]    = { OPAQUE, baralpha, borderalpha },
+    [SchemeUrgent]  = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
@@ -103,19 +105,19 @@ static const char *termcmd[]  = { TERMINAL, NULL };
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
+		{ "color15",            STRING,  &normfgcolor },
 		{ "color0",             STRING,  &normbgcolor },
-		{ "color0",             STRING,  &normbordercolor },
-		{ "color4",             STRING,  &normfgcolor },
-		{ "color4",             STRING,  &selbgcolor },
-		{ "color8",             STRING,  &selbordercolor },
-		{ "color0",             STRING,  &selfgcolor },
-		{ "borderpx",          	INTEGER, &borderpx },
+		{ "color8",             STRING,  &normbordercolor },
+		{ "color15",            STRING,  &selfgcolor },
+		{ "color2",             STRING,  &selbgcolor },
+		{ "color15",            STRING,  &selbordercolor },
         // { "color5",             STRING,  &warnfgcolor},
         { "color0",             STRING,  &warnbgcolor},
         { "color0",             STRING,  &warnbordercolor },
         // { "color6",             STRING,  &urgentfgcolor},
         { "color0",             STRING,  &urgentbgcolor},
         { "color0",             STRING,  &urgentbordercolor },
+		{ "borderpx",          	INTEGER, &borderpx },
         { "snap",          		INTEGER, &snap },
 		{ "showbar",          	INTEGER, &showbar },
 		{ "topbar",          	INTEGER, &topbar },
