@@ -108,7 +108,7 @@ git checkout -b patch_name-patch last_patch-patch
 For git users, use -3 to fix the conflict easily:
 ```
 cd dwm
-git apply patches/patch.diff
+patch -p1 patches/patch.diff
 ```
 
 Most patches change config.def.h, copy these changes in config.h with vimfidd:
@@ -141,3 +141,13 @@ git merge last_patch-patch
     - `dwm-statuscmd-20210405-67d76bd.diff`
 - vanity-gaps
     - `dwm-vanitygaps-20190508-6.2.diff`
+- [statuscolors](https://github.com/witty91/dwm-patches)
+    - `dwm-statuscolors-statuscmd-signal-6.2.diff`
+- systray
+    - `dwm-systray-20200914-61bb8b2.diff`
+- alpha
+    - `dwm-alpha-20201019-61bb8b2.diff`
+
+**NOTE**: since `restarttsig` and `statuscolors` use the same range of escape characters
+(ASCII < 32), this range was split into 16 characters for signals (max 16 dwmblocks) and 16
+for colorschemes, the latter accessible from `\x11` forward.
