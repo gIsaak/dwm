@@ -102,17 +102,17 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", normfgcolor, "-sf", normbgcolor, NULL };
 static const char *termcmd[]  = { TERMINAL, NULL };
 
 /*
  * Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
-		{ "color15",            STRING,  &normfgcolor },
+		{ "color4",             STRING,  &normfgcolor },
 		{ "color0",             STRING,  &normbgcolor },
 		{ "color8",             STRING,  &normbordercolor },
-		{ "color4",             STRING,  &selfgcolor },
+		{ "color15",            STRING,  &selfgcolor },
 		{ "color0",             STRING,  &selbgcolor },
 		{ "color15",            STRING,  &selbordercolor },
         // { "color5",             STRING,  &warnfgcolor},
